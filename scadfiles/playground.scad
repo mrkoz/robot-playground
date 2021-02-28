@@ -10,9 +10,9 @@ include <sn_tools.scad>
     /* tools */
     /* hacking */
     /* visuals */
-    b4e_pedistal();
+    rpg_pedistal();
     translateX(-30)
-    b4e_back_tab();
+    rpg_back_tab();
   }
 /******* Vars *******/
   pedistal_size = [100, 100, 200];
@@ -23,7 +23,7 @@ include <sn_tools.scad>
   // Not-Printing
 /******* uprights *******/
 
-module b4e_pedistal() {
+module rpg_pedistal() {
   union() {
     difference() {
       ccube(pedistal_size);
@@ -42,15 +42,15 @@ module b4e_pedistal() {
         //top left cutout
         translate([-30, 0, 98])ccube([30, 101, 9]);
 
-        b4e_ar_block();
+        rpg_ar_block();
       }
     }
-        b4e_pedistal_mounts(over_D = 0);
+        rpg_pedistal_mounts(over_D = 0);
     
   }
 }
 
-module b4e_pedistal_mounts(over_D = 0, height = pedistal_thickness+2, cutout=false) {
+module rpg_pedistal_mounts(over_D = 0, height = pedistal_thickness+2, cutout=false) {
   translateZ(10) {
     mirrorY() {
       hull() {
@@ -78,12 +78,12 @@ module b4e_pedistal_mounts(over_D = 0, height = pedistal_thickness+2, cutout=fal
   }
 }
 
-module b4e_ar_block() {
+module rpg_ar_block() {
   translateX(58)
   make_bevelled_box(size=[20,75,75], bevel=5);
 }
 
-module b4e_back_tab() {
+module rpg_back_tab() {
   difference() {
     translate([-38.3, 0, 11])
     union() {
@@ -97,7 +97,7 @@ module b4e_back_tab() {
 
     }
     union() {
-      b4e_pedistal_mounts(over_D = 10, height =20, cutout=true);
+      rpg_pedistal_mounts(over_D = 10, height =20, cutout=true);
     }
   }
 }

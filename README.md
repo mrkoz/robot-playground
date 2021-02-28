@@ -1,6 +1,8 @@
-# B4E Playground
+# Robot Playground
 
-STL's and OpenSCAD Generator files to make clamping playgrounds for B4E project
+Made to create a playground structure with corflute panels.
+
+Contains STL's and OpenSCAD Generator files to make clamping playgrounds for Robots
 
 ## Usage
 
