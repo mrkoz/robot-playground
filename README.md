@@ -12,9 +12,8 @@ Contains STL's and OpenSCAD Generator files to make clamping playgrounds for Rob
 
 ## Todos
 - [X] pilon for stands and AR markers
+- [x] intermediary pillar (flat join)
 - [ ] corner pillar
-- [ ] intermediary pillar
-- [x] license
 
 ## License
 

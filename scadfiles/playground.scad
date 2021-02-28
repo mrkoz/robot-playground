@@ -10,9 +10,15 @@ include <sn_tools.scad>
     /* tools */
     /* hacking */
     /* visuals */
-    rpg_pedistal();
-    translateX(-30)
-    rpg_back_tab();
+    rotateX(90) {
+      rpg_pedistal();
+      translateX(-30)
+      rpg_back_tab();
+      translateX(-70)
+      rpg_clip();
+      translateX(-100)
+      rpg_back_tab();
+    }
   }
 /******* Vars *******/
   pedistal_size = [100, 100, 200];
@@ -23,18 +29,28 @@ include <sn_tools.scad>
   // Not-Printing
 /******* uprights *******/
 
-module rpg_pedistal() {
+module rpg_clip(oversize_cut = false) {
+  rpg_pedistal(oversize_cut=true);
+}
+
+module rpg_pedistal(oversize_cut = false) {
   union() {
     difference() {
       ccube(pedistal_size);
       union() {
         translate([-36.5, 0, 10]) ccube([10, 101, 190]);
         translate([-46.5, 0, 25]) ccube([11, 101, 190]);
-
         // inner chop
-        difference() {
-          translateX(10) ccube(addXYZ(pedistal_size,-(2*pedistal_thickness + 20),(2*pedistal_thickness), -(2*pedistal_thickness)));
-          translate([-24, 0, 98])ccube([30, 121, 20]);
+        if (!oversize_cut) {
+          difference() {
+            translateX(10) ccube(addXYZ(pedistal_size,-(2*pedistal_thickness + 20),(2*pedistal_thickness), -(2*pedistal_thickness)));
+            translate([-24, 0, 98])ccube([30, 121, 20]);
+          }
+        } else {
+          difference() {
+            translateX(14) ccube(addXYZ(pedistal_size,-(2*pedistal_thickness + 11),(2*pedistal_thickness), +1));
+            translate([-24, 0, 98])ccube([30, 121, 20]);
+          }
         }
 
         // tab cutout
