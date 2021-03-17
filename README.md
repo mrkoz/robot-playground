@@ -56,7 +56,7 @@ Preview
 
 Or the model:
 
-<script src="https://github.com/mrkoz/robot-playground/blob/main/stl/playground-4x4.stl"></script>
+!["https://github.com/mrkoz/robot-playground/blob/main/stl/playground-4x4.stl"](https://github.com/mrkoz/robot-playground/blob/main/stl/playground-4x4.stl)
 
 ## Usage (Developers)
 
