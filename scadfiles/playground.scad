@@ -20,16 +20,26 @@ include <sn_tools.scad>
       // rpg_locking_back_tab();
     // }
 
-    // rotateX(90) rotateZ(90) rpg_clamp_flat_inner(simple=true);
+    // rotateX(90) rotateZ(90) 
+    // rpg_clamp_flat_inner(simple=true);
     // translateX(150) rotateX(90) rotateZ(90) rpg_clamp_flat_inner(simple=true);
     // translateX(180) rotateX(90) rotateZ(90) rpg_clamp_flat_inner(simple=true);
-    // translate([0, 120, -20]) rpg_clamp_flat_foot(simple=true);
+    // translate([0, 120, -20]) 
+    // rpg_clamp_flat_foot(simple=true);
     // // translateY(-130) rpg_clamp_corner(simple=true);
     // translate([0, -130, -20]) rpg_clamp_corner_foot(simple=true);
-    // rotateX(90) rpg_clamp_pedistol();
+    // rotateX(90) 
+    // rpg_clamp_pedistol();
     // translate([0, 0, -30]) 
-    // rotateX(90) rpg_clamp_pedistol_base();
+    // rotateX(90) 
+    // rpg_clamp_pedistol_base();
+    // rpg_short_clamp();
+    // playground_four_four();
+    // rpg_short_clamp_corner();
+    // rpg_short_clamp();
+    rpg_short_clamp_cross();
   }
+
 /******* Vars *******/
   pedistal_size = [100, 100, 200];
   pedistal_thickness = 7.5;
@@ -37,6 +47,71 @@ include <sn_tools.scad>
   cut_inset_Z = 40;
 /******* Parts for visibility *******/
   // Not-Printing
+  module playground_four_four() {
+    // corflute
+    white() {
+      mirrorX() translateX(2500) ccube([5, 5000, 200]);
+      mirrorY() translateY(2500) ccube([5000, 5, 200]);
+    }
+
+    // pedistols
+    blue()
+    mirrorX() mirrorY() {
+      translate([500,2540,0]) {
+        rotateZ(-90) {
+          rpg_clamp_pedistol();
+          rpg_clamp_pedistol_base();
+        }
+        translate([1000, 0, 0]) {
+          rotateZ(-90) {
+            rpg_clamp_pedistol();
+            rpg_clamp_pedistol_base();
+          }
+        }
+      }
+
+      translate([-2540,500,0]) {
+        rpg_clamp_pedistol();
+        rpg_clamp_pedistol_base();
+        translate([0, 1000, 0]) {
+          rpg_clamp_pedistol();
+          rpg_clamp_pedistol_base();
+        }
+      }
+    }
+    green()
+    // corners
+    mirrorX() mirrorY()
+    translate([-2500, -2500, 0]) {
+      rpg_clamp_corner(simple=true);
+      rpg_clamp_corner_foot(simple=true);
+    }
+
+    red()
+    mirrorX() mirrorY() {
+      // joiners (330)
+      translate([-2167, -2500, 0])
+      for (i = [1:14]) {
+        if (i%3 != 0)
+        translateX((i-1) * 333) {
+          // rpg_clamp_flat_inner(simple=true);
+          // rpg_clamp_flat_foot(simple=true);
+          rpg_short_clamp();
+        }
+      }
+      rotateZ(90)
+      translate([-2167, -2500, 0])
+      for (i = [1:14]) {
+        if (i%3 != 0)
+        translateX((i-1) * 333) {
+          // rpg_clamp_flat_inner(simple=true);
+          // rpg_clamp_flat_foot(simple=true);
+          rpg_short_clamp();
+        }
+      }
+    }
+
+  }
 /******* locking uprights *******/
 
   module rpg_locking_clip(oversize_cut = false) {
@@ -192,7 +267,6 @@ rpg_pedistol_undersize_Y = 100 - rpg_pedistol_foot_Y;
       translateX(39.5)
       rpg_clamp_flat_inner(with_cutout = with_cutout, simple=simple);
     }
-
   }
 
   module rpg_clamp_corner_foot(simple=false) {
@@ -208,7 +282,6 @@ rpg_pedistol_undersize_Y = 100 - rpg_pedistol_foot_Y;
         rpg_clamp_corner(with_cutout = false, simple=simple);
       }
     }
-
   }
 
   module rpg_clamp_flat_inner(with_cutout = true, simple=false, oversize=0) {
@@ -244,6 +317,39 @@ rpg_pedistol_undersize_Y = 100 - rpg_pedistol_foot_Y;
       }
     }
   }
+
+// really short joiners
+
+module rpg_short_clamp() {
+  oversize=0;
+  difference() {
+    union() {
+      ccube([40.01, rpg_inner_panel_thickness + oversize, 200]);
+      translateZ((200 - 30)/2) rotate([-90,0,90])make_triangle(size=[25 + oversize,30 + oversize,Ysize]);
+      translateZ(-(200 - 30)/2) rotate([90,0,90])make_triangle(size=[25 + oversize,30 + oversize,Ysize]);
+          mirrorX() translate([15,0,rpg_clamp_wall_thickness/2])
+          make_bevelled_box([rpg_clamp_wall_thickness * 2, rpg_inner_panel_thickness + rpg_clamp_wall_thickness * 2, 200 + rpg_clamp_wall_thickness], bevel = rpg_clamp_wall_thickness /1.01);
+    }
+    union() {
+      // panel spacer
+      ccube([61, rpg_clamp_space, 200 - rpg_clamp_panel_thickness * 2 + 0.1]);
+      // cutter
+      ccube([50, 50, 150]);
+    }
+  }
+}
+
+module rpg_short_clamp_corner() {
+  translate([23.5,0,0])
+  rpg_short_clamp();
+  translate([0,23.5,0])
+  rotateZ(90) rpg_short_clamp();
+
+}
+module rpg_short_clamp_cross() {
+  rpg_short_clamp_corner();
+  rotateZ(180) rpg_short_clamp_corner();
+}
 
 // rpg bits
 
