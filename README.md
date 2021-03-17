@@ -52,9 +52,10 @@ Assuming you've printed all the parts and cut all the corflute. If you want to b
 4. Stand up walls with 
 
 Preview
-![playground4x4.png](playground4x4.png)
+![playground4x4.png](images/playground4x4.png)
 
 Or the model:
+
 <script src="https://github.com/mrkoz/robot-playground/blob/main/stl/playground-4x4.stl"></script>
 
 ## Usage (Developers)
