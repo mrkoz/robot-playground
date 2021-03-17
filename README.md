@@ -24,10 +24,9 @@ There are 4 main printable parts:
 * Material - doesn't really matter but PLA is good
 * Layer-height 0.1mm - 0.6mm - this isn't overly important as the parts have limited tolerances.
 * Support is not needed apart from the pedistol components
-* Layer-height does not matter
 * Wall thickness 1-1.5mm
-* top/bottom layer thickness 1-1.5mm
-* Infil 10-20% for gyroid infil, 15-25% for rectilinear
+* Infil 10% for gyroid infil, 15-25% for rectilinear 
+* Too much infil/walls will make the models not stretch
 
 ## Example 
 
