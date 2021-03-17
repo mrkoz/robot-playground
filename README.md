@@ -59,7 +59,7 @@ Preview
 
 1. Clone down the tools repo [from here](https://github.com/mrkoz/openscad-parts)
 2. Add the repo to the OpenSCAD path [instructions here](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Libraries#Setting_OPENSCADPATH)
-3. include the `sn_tools.scad` meta-import file like this
+3. Hack away at the playground code, triggers are done in the `render_workspace` module.
 
 ## License
 
