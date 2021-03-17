@@ -34,10 +34,22 @@ include <sn_tools.scad>
     // rotateX(90) 
     // rpg_clamp_pedistol_base();
     // rpg_short_clamp();
-    // playground_four_four();
     // rpg_short_clamp_corner();
     // rpg_short_clamp();
-    rpg_short_clamp_cross();
+    // rpg_short_clamp_cross();
+
+    // for print
+    // rpg_short_clamps_for_print();
+
+    // for show
+    playground_four_four();
+
+  }
+
+  module rpg_short_clamps_for_print() {
+    translateX(-60) rpg_short_clamp_corner();
+    translateX(60) rpg_short_clamp();
+    translateX(160) rpg_short_clamp_cross();
   }
 
 /******* Vars *******/
@@ -83,8 +95,7 @@ include <sn_tools.scad>
     // corners
     mirrorX() mirrorY()
     translate([-2500, -2500, 0]) {
-      rpg_clamp_corner(simple=true);
-      rpg_clamp_corner_foot(simple=true);
+      rpg_short_clamp_corner();
     }
 
     red()
@@ -322,13 +333,13 @@ rpg_pedistol_undersize_Y = 100 - rpg_pedistol_foot_Y;
 
 module rpg_short_clamp() {
   oversize=0;
+  Ysize = 40.01 + oversize;
   difference() {
     union() {
-      ccube([40.01, rpg_inner_panel_thickness + oversize, 200]);
-      translateZ((200 - 30)/2) rotate([-90,0,90])make_triangle(size=[25 + oversize,30 + oversize,Ysize]);
-      translateZ(-(200 - 30)/2) rotate([90,0,90])make_triangle(size=[25 + oversize,30 + oversize,Ysize]);
-          mirrorX() translate([15,0,rpg_clamp_wall_thickness/2])
-          make_bevelled_box([rpg_clamp_wall_thickness * 2, rpg_inner_panel_thickness + rpg_clamp_wall_thickness * 2, 200 + rpg_clamp_wall_thickness], bevel = rpg_clamp_wall_thickness /1.01);
+      ccube([28.01, rpg_inner_panel_thickness + oversize, 200]);
+
+      mirrorX() translate([14,0,rpg_clamp_wall_thickness/2])
+      make_bevelled_box([rpg_clamp_wall_thickness * 2, rpg_inner_panel_thickness + rpg_clamp_wall_thickness * 2, 200 + rpg_clamp_wall_thickness], bevel = rpg_clamp_wall_thickness /1.01);
     }
     union() {
       // panel spacer
@@ -340,9 +351,9 @@ module rpg_short_clamp() {
 }
 
 module rpg_short_clamp_corner() {
-  translate([23.5,0,0])
+  translate([22.5,0,0])
   rpg_short_clamp();
-  translate([0,23.5,0])
+  translate([0,22.5,0])
   rotateZ(90) rpg_short_clamp();
 
 }
