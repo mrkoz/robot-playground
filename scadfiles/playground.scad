@@ -7,49 +7,75 @@ include <sn_tools.scad>
 
   module render_workspace() {
     $fn = 60;
-    /* tools */
     /* hacking */
-    /* visuals */
-    // rotateX(90) {
-      // rpg_locking_pedistal();
-      // translateX(-30)
-      // rpg_locking_back_tab();
-      // translateX(-70)
-      // rpg_locking_clip();
-      // translateX(-100)
-      // rpg_locking_back_tab();
-    // }
+    
+      // rotateX(90) {
+        // rpg_locking_pedistal();
+        // translateX(-30)
+        // rpg_locking_back_tab();
+        // translateX(-70)
+        // rpg_locking_clip();
+        // translateX(-100)
+        // rpg_locking_back_tab();
+      // }
 
-    // rotateX(90) rotateZ(90) 
-    // rpg_clamp_flat_inner(simple=true);
-    // translateX(150) rotateX(90) rotateZ(90) rpg_clamp_flat_inner(simple=true);
-    // translateX(180) rotateX(90) rotateZ(90) rpg_clamp_flat_inner(simple=true);
-    // translate([0, 120, -20]) 
-    // rpg_clamp_flat_foot(simple=true);
-    // // translateY(-130) rpg_clamp_corner(simple=true);
-    // translate([0, -130, -20]) rpg_clamp_corner_foot(simple=true);
-    // rotateX(90) 
-    // rpg_clamp_pedistol();
-    // translate([0, 0, -30]) 
-    // rotateX(90) 
-    // rpg_clamp_pedistol_base();
-    // rpg_short_clamp();
-    // rpg_short_clamp_corner();
-    // rpg_short_clamp();
-    // rpg_short_clamp_cross();
+      // rotateX(90) rotateZ(90) 
+      // rpg_clamp_flat_inner(simple=true);
+      // translateX(150) rotateX(90) rotateZ(90) rpg_clamp_flat_inner(simple=true);
+      // translateX(180) rotateX(90) rotateZ(90) rpg_clamp_flat_inner(simple=true);
+      // translate([0, 120, -20]) 
+      // rpg_clamp_flat_foot(simple=true);
+      // // translateY(-130) rpg_clamp_corner(simple=true);
+      // translate([0, -130, -20]) rpg_clamp_corner_foot(simple=true);
+      // rotateX(90) rpg_clamp_pedistol();
+      // translate([0, 0, -30]) 
+      // rotateX(90) rpg_clamp_pedistol_base();
+      // rpg_short_clamp();
+      // rpg_short_clamp_corner();
+      // rpg_short_clamp();
+      // rpg_short_clamp_cross();
 
-    // for print
+
+    /* for print */
+
+    // ----  all mini-clamps
     // rpg_short_clamps_for_print();
+    // ----  cross
+    // rpg_short_clamps_for_print(cross=true, corner=false, join=false);
+    // ---- corner
+    // rpg_short_clamps_for_print(cross=false, corner=true, join=false);
+    // ---- joiner
+    // rpg_short_clamps_for_print(cross=false, corner=false, join=true);
 
-    // for show
-    playground_four_four();
+    // ---- pedistol
+    // rotateX(90) rpg_clamp_pedistol();
+    // ---- pedistol base
+    // rotateX(90) rpg_clamp_pedistol_base();
 
+    /* visuals */
+      // ---- for show
+      // playground_four_four();
   }
 
-  module rpg_short_clamps_for_print() {
-    translateX(-60) rpg_short_clamp_corner();
-    translateX(60) rpg_short_clamp();
-    translateX(160) rpg_short_clamp_cross();
+  module rpg_short_clamps_for_print(cross=true, corner=true, join=true) {
+    difference() {
+      union() {
+        translateY(50) {
+          if (cross) translateX(80) rpg_short_clamp_cross();
+          if (corner) translateX(-80) rpg_short_clamp_corner();
+          if (join) translateX(0) rpg_short_clamp();
+        }
+        rotateX(180)
+        translateY(50) {
+          if (cross) translateX(80) rpg_short_clamp_cross();
+          if (corner) translateX(-80) rpg_short_clamp_corner();
+          if (join) translateX(0) rpg_short_clamp();
+        }
+      }
+      translateZ(-100) {
+        ccube([450, 250, 55]);
+      }
+    }
   }
 
 /******* Vars *******/
