@@ -27,9 +27,9 @@ include <sn_tools.scad>
       // rpg_clamp_flat_foot(simple=true);
       // // translateY(-130) rpg_clamp_corner(simple=true);
       // translate([0, -130, -20]) rpg_clamp_corner_foot(simple=true);
-      // rotateX(90) rpg_clamp_pedistol();
+      // rpg_clamp_pedistol();
       // translate([0, 0, -30]) 
-      // rotateX(90) rpg_clamp_pedistol_base();
+      // rpg_clamp_pedistol_base();
       // rpg_short_clamp();
       // rpg_short_clamp_corner();
       // rpg_short_clamp();
@@ -255,18 +255,18 @@ rpg_pedistol_undersize_Y = 100 - rpg_pedistol_foot_Y;
       difference() {
         union() {
           // front and top
-          ccube([100, 100, 200 + 0.01]);
+          ccube([100 + cutout_oversize, 100, 200 + 0.01]);
         }
         union() {
           // ar block 
           rpg_ar_block();
           // tail cut
-          translate([-rpg_clamp_wall_thickness, 0, -rpg_clamp_wall_thickness]) {
+          translate([-rpg_clamp_wall_thickness - cutout_oversize/2, 0, -rpg_clamp_wall_thickness]) {
               ccube([100.1, 100.1, 200.1]);
           }
           mirrorY() {
             translate([50 - rpg_clamp_wall_thickness/2, 35, -100 + rpg_clamp_wall_thickness/2])
-            ccube([rpg_clamp_wall_thickness + 0.01 + cutout_oversize, 35.01 + cutout_oversize, rpg_clamp_wall_thickness + 0.02]);
+            ccube([rpg_clamp_wall_thickness + 0.01 + cutout_oversize*2, 35.01 - cutout_oversize, rpg_clamp_wall_thickness + 0.02]);
           }
         }
       }
@@ -289,7 +289,7 @@ rpg_pedistol_undersize_Y = 100 - rpg_pedistol_foot_Y;
         translate([-(rpg_clamp_wall_thickness + rpg_clamp_space)/2, 0, -rpg_clamp_wall_thickness/2])
           ccube([sizeX - rpg_clamp_wall_thickness * 2, sizeY + 0.01 , sizeZ  - rpg_clamp_wall_thickness * 3]);
 
-          rpg_clamp_pedistol(cutout_oversize=0.5);
+          rpg_clamp_pedistol(cutout_oversize=1.5);
 
       }
     }
