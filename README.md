@@ -38,7 +38,7 @@ Building a 5m square 4x4 spaced pedistol with split corflute panels that are 333
 |-|-|
 | Pedistol | 16 |
 | Corner | 4 (pairs) |
-| Join | 50 (pairs) |
+| Join | 40 (pairs) |
 | Corflute panels (188mm x 333mm x 5mm) |  60 |
 
 ### Assembly
