@@ -48,7 +48,7 @@ include <sn_tools.scad>
     // rpg_short_clamps_for_print(cross=false, corner=false, join=true);
 
     // ---- pedistol
-    // rotateX(90) rpg_clamp_pedistol();
+    rotateX(90) rpg_clamp_pedistol();
     // ---- pedistol base
     // rotateX(90) rpg_clamp_pedistol_base();
 
@@ -289,7 +289,7 @@ rpg_pedistol_undersize_Y = 100 - rpg_pedistol_foot_Y;
         translate([-(rpg_clamp_wall_thickness + rpg_clamp_space)/2, 0, -rpg_clamp_wall_thickness/2])
           ccube([sizeX - rpg_clamp_wall_thickness * 2, sizeY + 0.01 , sizeZ  - rpg_clamp_wall_thickness * 3]);
 
-          rpg_clamp_pedistol(cutout_oversize=1.5);
+          rpg_clamp_pedistol(cutout_oversize=2.5);
 
       }
     }
