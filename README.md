@@ -16,7 +16,7 @@ There are 4 main printable parts:
 |-|-|-|
 | Corner | `stl/corner.stl` | this is a corner joiner ready to print, the flat surfaced one is for the bottom |
 | Cross  | `stl/cross.stl` | this is a cross joiner stand ready to print, the flat surfaced one is for the bottom |
-| Join | `stl/cross.stl` | this is a clamp part to join 2 straight corflute panels with friction stand ready, the flat surfaced one is for the bottom |
+| Join | `stl/join.stl` | this is a clamp part to join 2 straight corflute panels with friction stand ready, the flat surfaced one is for the bottom |
 | Pedistol | `stl/clamp_pedistol_base.stl` `stl/clamp_pedistol.stl` | This is a two part stand, the base goes at the bottom.
 
 ## Printer settings
