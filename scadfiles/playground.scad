@@ -48,7 +48,7 @@ include <sn_tools.scad>
     // rpg_short_clamps_for_print(cross=false, corner=false, join=true);
 
     // ---- pedistol
-    rotateX(90) rpg_clamp_pedistol();
+    // rotateX(90) rpg_clamp_pedistol();
     // ---- pedistol base
     // rotateX(90) rpg_clamp_pedistol_base();
 
