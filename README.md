@@ -55,6 +55,19 @@ Preview
 
 ["The model is here"](https://github.com/mrkoz/robot-playground/blob/main/stl/playground-4x4.stl)
 
+## Puzzle Playground
+
+This playground is designed to fit together like the robot playground but it has a floor with parts that slot together.
+
+Depending on the size of the maze/playground you want to build.
+
+There are 2 pre-rendered sizes:
+
+1. [240x240](outputs/puzzle_playground240x240.svg)
+2. [300x300](outputs/puzzle_playground300x300.svg)
+
+Both sizes use the 5mm gap [puzzle joiners](outputs/puzzle_playground_joiners.stl)
+
 ## Usage (Developers)
 
 1. Clone down the tools repo [from here](https://github.com/mrkoz/openscad-parts)

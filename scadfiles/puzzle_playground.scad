@@ -43,18 +43,26 @@ bowtie 72
     // Laser parts - walls and floor
 
     // projection() 
-    // projection() ppg_parts_to_laser_1();
-    // projection() ppg_parts_to_laser_2();
-    // projection() ppg_parts_to_laser_3();
-    // projection() ppg_parts_to_laser_4();
-    projection() ppg_parts_to_laser_5();
+    // T([500, -500, 0]) projection() ppg_parts_to_laser_1();
+    // T([500, 500, 0]) projection() ppg_parts_to_laser_2();
+    // T([-500, 500, 0]) projection() ppg_parts_to_laser_3();
+    // T([-500, -500, 0]) projection() ppg_parts_to_laser_4();
+    // T([1000, 500, 0]) projection() ppg_parts_to_laser_5();
+    // T([1000, 500, 0]) projection() ppg_parts_to_laser_5();
+
+    // all bits in one part
+    projection() 
+      ppg_parts_to_laser_all();
+
+    // test fit
+    // ppg_layout_parts();
 
   }
 
 /** params **/
   panel_thickness = 5;
-  floor_panel_W = 240;
-  wall_panel_W = 240;
+  floor_panel_W = 240; // 240
+  wall_panel_W = 240; // 240
   wall_panel_H = 180;
   wall_panel_tab_W = 10;
 
@@ -68,6 +76,36 @@ bowtie 72
   cutout_non = 0;
   cutout_cut = 1;
   cutout_add = 2;
+
+  /** nice to have spacer things! **/
+    ft_o_left = -(1 * floor_panel_W);
+    ft_o_right = -ft_o_left;
+    ft_o_top = (1 * floor_panel_W);
+    ft_o_bottom = -ft_o_top;
+
+    ft_combo_top_left = [cutout_non, cutout_add, cutout_add, cutout_non];
+    ft_combo_top = [cutout_non, cutout_add, cutout_add, cutout_cut];
+    ft_combo_top_right = [cutout_non, cutout_non, cutout_add, cutout_cut];
+
+    ft_combo_left = [cutout_cut, cutout_add, cutout_add, cutout_non];
+    ft_combo_middle = [cutout_cut, cutout_add, cutout_add, cutout_cut];
+    ft_combo_right = [cutout_cut, cutout_non, cutout_add, cutout_cut];
+
+    ft_combo_bottom_left = [cutout_cut, cutout_add, cutout_non, cutout_non];
+    ft_combo_bottom = [cutout_cut, cutout_add, cutout_non, cutout_cut];
+    ft_combo_bottom_right = [cutout_cut, cutout_non, cutout_non, cutout_cut];
+
+    ft_offset_top_left = [ft_o_left, ft_o_top, 0];
+    ft_offset_top = [0, ft_o_top, 0];
+    ft_offset_top_right = [ft_o_right, ft_o_top, 0];
+
+    ft_offset_left = [ft_o_left, 0, 0];
+    ft_offset_middle = [0, 0, 0];
+    ft_offset_right = [ft_o_right, 0, 0];
+
+    ft_offset_bottom_left = [ft_o_left, ft_o_bottom, 0];
+    ft_offset_bottom = [0, ft_o_bottom, 0];
+    ft_offset_bottom_right = [ft_o_right, ft_o_bottom, 0];
 
 module ppg_retainers() {
   D() {
@@ -180,6 +218,40 @@ module ppg_parts_to_laser_5() {
   T([ (floor_panel_W/2 + sp), -(floor_panel_W/2 + sp)]) ppg_make_floor_panel(light=true, cutout=[cutout_cut, cutout_add, cutout_add, cutout_cut]); // * 36
   T([-(floor_panel_W/2 + sp), -(floor_panel_W/2 + sp)]) ppg_make_floor_panel(light=true, cutout=[cutout_cut, cutout_add, cutout_add, cutout_non]); // * 36
 }
+
+module ppg_parts_to_laser_all() {
+  sp = 20;
+  ppg_layout_parts(spacer = sp);
+  // single side
+  red() T([-(2 * floor_panel_W + sp + 10), (0.75 * floor_panel_W + sp)]) Rx() ppg_make_wall_panel(double_panel=false);
+
+  // double side
+  T([-(3 * floor_panel_W + sp + 10), -(0.75 * floor_panel_W + sp)]) Tx(wall_panel_W/2) Rx() ppg_make_wall_panel(double_panel=true);
+}
+
+
+
+  module ppg_layout_parts(spacer = 30) {
+    // sp=1
+    // 3 x 3 grid
+    // top row
+    white() T(addXY(ft_offset_top_left,   -spacer, spacer)) ppg_make_floor_panel(light=true, cutout=ft_combo_top_left);
+    black() T(addXY(ft_offset_top,        0, spacer)) ppg_make_floor_panel(light=true, cutout=ft_combo_top);
+    white() T(addXY(ft_offset_top_right,  spacer, spacer)) ppg_make_floor_panel(light=true, cutout=ft_combo_top_right);
+    // middle addXY(row, spacer, spacer)
+    black() T(addXY(ft_offset_left,       -spacer, 0)) ppg_make_floor_panel(light=true, cutout=ft_combo_left);
+    white() T(addXY(ft_offset_middle,     0, 0)) ppg_make_floor_panel(light=true, cutout=ft_combo_middle);
+    black() T(addXY(ft_offset_right,      spacer, 0)) ppg_make_floor_panel(light=true, cutout=ft_combo_right);
+
+    // bottom row
+    white() T(addXY(ft_offset_bottom_left, -spacer, -spacer)) ppg_make_floor_panel(light=true, cutout=ft_combo_bottom_left);
+    black() T(addXY(ft_offset_bottom,     0, -spacer)) ppg_make_floor_panel(light=true, cutout=ft_combo_bottom);
+    white() T(addXY(ft_offset_bottom_right, spacer, -spacer)) ppg_make_floor_panel(light=true, cutout=ft_combo_bottom_right);
+
+    // outer wall
+    // inner cross
+  }
+
 
 /** floor **/
   module ppg_make_floor() {
